@@ -109,20 +109,20 @@ optional = true
 
 [dependencies.embassy-usb-0_3]
 package = "embassy-usb"
-git = "https://github.com/embassy-rs/embassy.git"
+git = "https://github.com/adom-inc/embassy.git"
 optional = true
 
 [dependencies.embassy-usb-0_4]
 package = "embassy-usb"
-git = "https://github.com/embassy-rs/embassy.git"
+git = "https://github.com/adom-inc/embassy.git"
 optional = true
 
 [dependencies.embassy-usb-driver]
-git = "https://github.com/embassy-rs/embassy.git"
+git = "https://github.com/adom-inc/embassy.git"
 optional = true
 
 [dependencies.embassy-sync]
-git = "https://github.com/embassy-rs/embassy.git"
+git = "https://github.com/adom-inc/embassy.git"
 optional = true
 
 [dependencies.static_cell]
@@ -130,15 +130,15 @@ version = "2.1"
 optional = true
 
 [dependencies.embassy-executor]
-git = "https://github.com/embassy-rs/embassy.git"
+git = "https://github.com/adom-inc/embassy.git"
 optional = true
 
 [dependencies.embassy-futures]
-git = "https://github.com/embassy-rs/embassy.git"
+git = "https://github.com/adom-inc/embassy.git"
 optional = true
 
 [dependencies.embassy-time]
-git = "https://github.com/embassy-rs/embassy.git"
+git = "https://github.com/adom-inc/embassy.git"
 optional = true
 
 [dependencies.portable-atomic]
