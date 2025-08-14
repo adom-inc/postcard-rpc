@@ -11,7 +11,7 @@ use core::sync::atomic::{AtomicU8, Ordering};
 use embassy_futures::select::{select, Either};
 use embassy_sync_0_7::{blocking_mutex::raw::RawMutex, mutex::Mutex};
 use embassy_time::Timer;
-use embassy_usb_driver_0_2::{Driver, Endpoint, EndpointError, EndpointIn, EndpointOut};
+use embassy_usb_0_5::driver::{Driver, Endpoint, EndpointError, EndpointIn, EndpointOut};
 use serde::Serialize;
 use static_cell::ConstStaticCell;
 
@@ -58,7 +58,7 @@ pub mod dispatch_impl {
         msos::{self, windows_version},
         Builder, Config, UsbDevice,
     };
-    use embassy_usb_driver_0_2::Driver;
+    use embassy_usb_0_5::driver::Driver;
     use static_cell::{ConstStaticCell, StaticCell};
 
     /// Type alias for `WireTx` impl
