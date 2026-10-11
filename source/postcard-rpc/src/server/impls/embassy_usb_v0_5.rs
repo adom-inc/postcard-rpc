@@ -186,6 +186,23 @@ pub mod dispatch_impl {
             config: Config<'static>,
             tx_buf: &'static mut [u8],
         ) -> (Builder<'static, D>, WireTxImpl<M, D>, WireRxImpl<D>) {
+            self.init_without_build_with_class(driver, config, tx_buf, 0xFF, 0, 0)
+        }
+
+        /// Initialize the static storage, without building `Builder`, with the
+        /// given interface class, subclass and protocol, so a host can tell the
+        /// interface apart from the device's other vendor-specific interfaces.
+        ///
+        /// This must only be called once.
+        pub fn init_without_build_with_class(
+            &'static self,
+            driver: D,
+            config: Config<'static>,
+            tx_buf: &'static mut [u8],
+            class: u8,
+            subclass: u8,
+            protocol: u8,
+        ) -> (Builder<'static, D>, WireTxImpl<M, D>, WireRxImpl<D>) {
             let bufs = self.bufs_usb.take();
 
             let mut builder = Builder::new(
@@ -212,9 +229,9 @@ pub mod dispatch_impl {
 
             // Add a vendor-specific function (class 0xFF), and corresponding interface,
             // that uses our custom handler.
-            let mut function = builder.function(0xFF, 0, 0);
+            let mut function = builder.function(class, subclass, protocol);
             let mut interface = function.interface();
-            let mut alt = interface.alt_setting(0xFF, 0, 0, None);
+            let mut alt = interface.alt_setting(class, subclass, protocol, None);
             let ep_out = alt.endpoint_bulk_out(None, 64);
             let ep_in = alt.endpoint_bulk_in(None, 64);
             drop(function);
