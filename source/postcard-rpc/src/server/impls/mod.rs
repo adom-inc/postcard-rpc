@@ -60,6 +60,24 @@ pub(crate) mod embassy_shared {
         Sp: WireSpawn<Error = SpawnError, Info = Spawner>,
     {
         let info = sp.info();
-        info.spawn(tok)
+        info.spawn(tok).into_spawn_result()
+    }
+
+    /// `Spawner::spawn` returns a `Result` in older embassy-executor releases,
+    /// and nothing in newer ones (spawning can't fail once a task has a token).
+    trait SpawnResult {
+        fn into_spawn_result(self) -> Result<(), SpawnError>;
+    }
+
+    impl SpawnResult for () {
+        fn into_spawn_result(self) -> Result<(), SpawnError> {
+            Ok(())
+        }
+    }
+
+    impl SpawnResult for Result<(), SpawnError> {
+        fn into_spawn_result(self) -> Result<(), SpawnError> {
+            self
+        }
     }
 }
